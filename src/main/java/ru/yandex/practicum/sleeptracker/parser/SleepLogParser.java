@@ -14,8 +14,8 @@ public class SleepLogParser {
 
     public List<SleepingSession> parse(String path) throws IOException {
         return Files.lines(Path.of(path))
-                .map(this::parseLine)
-                .toList();
+            .map(this::parseLine)
+            .toList();
     }
 
     private SleepingSession parseLine(String line) {
@@ -32,3 +32,4 @@ public class SleepLogParser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
         return LocalDateTime.parse(str, formatter);
     }
+}
