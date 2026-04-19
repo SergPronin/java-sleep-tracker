@@ -5,6 +5,5 @@ import java.util.function.Function;
 import ru.yandex.practicum.sleeptracker.model.SleepAnalysisResult;
 import ru.yandex.practicum.sleeptracker.model.SleepingSession;
 
-public interface SleepAnalysis
-    extends Function<List<SleepingSession>, SleepAnalysisResult> {
-}
+@FunctionalInterface
+public interface SleepAnalysis extends Function<List<SleepingSession>, SleepAnalysisResult> {}
