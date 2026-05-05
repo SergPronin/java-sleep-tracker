@@ -13,14 +13,12 @@ public final class SleeplessNightsAnalysis implements SleepAnalysis {
     if (sessions.isEmpty()) {
       return new SleepAnalysisResult("Количество бессонных ночей", 0L);
     }
-    LocalDateTime logStart = NightMath.loggingStart(sessions);
     LocalDateTime logEnd = NightMath.loggingEnd(sessions);
-    LocalDate firstNight = NightMath.firstNightToConsider(logStart);
-    LocalDate lastNight = NightMath.lastNightInclusive(firstNight, logStart, logEnd);
+    LocalDate firstNight = NightMath.firstNightToConsider(NightMath.loggingStart(sessions));
+    LocalDate lastNight = NightMath.lastNightToConsider(logEnd);
 
     long sleepless =
         NightMath.nightsBetween(firstNight, lastNight)
-            .filter(n -> NightMath.nightWindowTouchesLogging(n, logStart, logEnd))
             .filter(n -> NightMath.isSleeplessNight(n, sessions))
             .count();
 

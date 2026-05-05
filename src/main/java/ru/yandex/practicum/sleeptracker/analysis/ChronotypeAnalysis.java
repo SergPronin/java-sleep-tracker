@@ -17,14 +17,12 @@ public final class ChronotypeAnalysis implements SleepAnalysis {
     if (sessions.isEmpty()) {
       return new SleepAnalysisResult("Хронотип пользователя", Chronotype.PIGEON);
     }
-    LocalDateTime logStart = NightMath.loggingStart(sessions);
     LocalDateTime logEnd = NightMath.loggingEnd(sessions);
-    LocalDate firstNight = NightMath.firstNightToConsider(logStart);
-    LocalDate lastNight = NightMath.lastNightInclusive(firstNight, logStart, logEnd);
+    LocalDate firstNight = NightMath.firstNightToConsider(NightMath.loggingStart(sessions));
+    LocalDate lastNight = NightMath.lastNightToConsider(logEnd);
 
     List<Chronotype> perNight =
         NightMath.nightsBetween(firstNight, lastNight)
-            .filter(n -> NightMath.nightWindowTouchesLogging(n, logStart, logEnd))
             .filter(n -> !NightMath.isSleeplessNight(n, sessions))
             .map(n -> pickRepresentativeSession(n, sessions))
             .flatMap(Optional::stream)
@@ -39,7 +37,6 @@ public final class ChronotypeAnalysis implements SleepAnalysis {
     return new SleepAnalysisResult("Хронотип пользователя", result);
   }
 
-  /** Одна сессия на ночь: не дневной сон, пересекает окно 0:00–6:00; при нескольких — самая длинная. */
   private static Optional<SleepingSession> pickRepresentativeSession(
       LocalDate night, List<SleepingSession> sessions) {
     return sessions.stream()
@@ -48,7 +45,6 @@ public final class ChronotypeAnalysis implements SleepAnalysis {
         .max(Comparator.comparingLong(SleepingSession::getDurationMinutes));
   }
 
-  /** Сова имеет приоритет формулировки ТЗ над «остальными»; иначе жаворонок; иначе голубь. */
   private static Chronotype classifyNight(SleepingSession s) {
     if (isOwl(s)) {
       return Chronotype.OWL;

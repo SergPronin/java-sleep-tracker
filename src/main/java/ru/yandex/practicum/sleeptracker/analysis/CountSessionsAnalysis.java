@@ -8,6 +8,6 @@ public final class CountSessionsAnalysis implements SleepAnalysis {
 
     @Override
     public SleepAnalysisResult apply(List<SleepingSession> sessions) {
-        return new SleepAnalysisResult("Количество сессий сна", sessions.size());
+        return new SleepAnalysisResult("Количество сессий сна", (long) sessions.size());
     }
 }

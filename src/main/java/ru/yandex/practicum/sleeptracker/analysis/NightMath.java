@@ -20,20 +20,17 @@ public final class NightMath {
     return s.getStartTime().isBefore(wEnd) && s.getEndTime().isAfter(wStart);
   }
 
-  public static boolean nightWindowTouchesLogging(
-      LocalDate night, LocalDateTime logStart, LocalDateTime logEnd) {
-    LocalDateTime wStart = night.atStartOfDay();
-    LocalDateTime wEnd = night.atTime(6, 0);
-    return logStart.isBefore(wEnd) && logEnd.isAfter(wStart);
-  }
-
   public static LocalDate firstNightToConsider(LocalDateTime firstSessionStart) {
     LocalTime noon = LocalTime.of(12, 0);
     LocalDate d = firstSessionStart.toLocalDate();
     if (firstSessionStart.toLocalTime().isAfter(noon)) {
       return d.plusDays(1);
     }
-    return d.minusDays(1);
+    return d;
+  }
+
+  public static LocalDate lastNightToConsider(LocalDateTime logEnd) {
+    return logEnd.toLocalDate();
   }
 
   public static LocalDateTime loggingStart(List<SleepingSession> sessions) {
@@ -42,18 +39,6 @@ public final class NightMath {
 
   public static LocalDateTime loggingEnd(List<SleepingSession> sessions) {
     return sessions.get(sessions.size() - 1).getEndTime();
-  }
-
-  public static LocalDate lastNightInclusive(
-      LocalDate firstNight, LocalDateTime logStart, LocalDateTime logEnd) {
-    LocalDate upper = logEnd.toLocalDate();
-    long maxSteps = Math.max(0, ChronoUnit.DAYS.between(firstNight, upper) + 1);
-    return Stream.iterate(upper, d -> d.minusDays(1))
-        .limit(maxSteps)
-        .filter(d -> !d.isBefore(firstNight))
-        .filter(d -> nightWindowTouchesLogging(d, logStart, logEnd))
-        .findFirst()
-        .orElse(firstNight);
   }
 
   public static boolean isSleeplessNight(
