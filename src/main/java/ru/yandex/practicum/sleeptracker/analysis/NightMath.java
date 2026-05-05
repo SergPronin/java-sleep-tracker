@@ -11,7 +11,8 @@ import ru.yandex.practicum.sleeptracker.model.SleepingSession;
 
 public final class NightMath {
 
-  private NightMath() {}
+  private NightMath() {
+  }
 
   public static boolean overlapsMorningWindow(
       SleepingSession s, LocalDate night) {
