@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.sleeptracker.model.SleepQuality;
 import ru.yandex.practicum.sleeptracker.model.SleepingSession;
 
-class SleeplessNightsAnalysisTest {
+public class SleeplessNightsAnalysisTest {
 
   private final SleeplessNightsAnalysis analysis = new SleeplessNightsAnalysis();
 
   @Test
-  void empty_returnsZero() {
+  public void empty_returnsZero() {
     assertEquals(0L, (long) (Long) analysis.apply(List.of()).getValue());
   }
 
   @Test
-  void sleepFrom23to03_notSleepless() {
+  public void sleepFrom23to03_notSleepless() {
     LocalDateTime start = LocalDateTime.of(2025, 10, 1, 23, 0);
     LocalDateTime end = LocalDateTime.of(2025, 10, 2, 3, 0);
     List<SleepingSession> sessions = List.of(new SleepingSession(start, end, SleepQuality.GOOD));
@@ -26,7 +26,7 @@ class SleeplessNightsAnalysisTest {
   }
 
   @Test
-  void sleepFrom2to7_notSleepless() {
+  public void sleepFrom2to7_notSleepless() {
     LocalDateTime start = LocalDateTime.of(2025, 10, 2, 2, 0);
     LocalDateTime end = LocalDateTime.of(2025, 10, 2, 7, 0);
     List<SleepingSession> sessions = List.of(new SleepingSession(start, end, SleepQuality.GOOD));
@@ -34,7 +34,7 @@ class SleeplessNightsAnalysisTest {
   }
 
   @Test
-  void sleepOnly7to11_isSleeplessNight() {
+  public void sleepOnly7to11_isSleeplessNight() {
     LocalDateTime start = LocalDateTime.of(2025, 10, 3, 7, 0);
     LocalDateTime end = LocalDateTime.of(2025, 10, 3, 11, 0);
     List<SleepingSession> sessions = List.of(new SleepingSession(start, end, SleepQuality.NORMAL));
@@ -42,7 +42,7 @@ class SleeplessNightsAnalysisTest {
   }
 
   @Test
-  void firstSessionAfterNoon_skipsMorningWithoutOverlap() {
+  public void firstSessionAfterNoon_skipsMorningWithoutOverlap() {
     LocalDateTime napStart = LocalDateTime.of(2025, 10, 3, 14, 0);
     LocalDateTime napEnd = LocalDateTime.of(2025, 10, 3, 15, 0);
     LocalDateTime nightStart = LocalDateTime.of(2025, 10, 4, 23, 0);

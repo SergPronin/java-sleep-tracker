@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.sleeptracker.model.SleepQuality;
 import ru.yandex.practicum.sleeptracker.model.SleepingSession;
 
-class AverageDurationAnalysisTest {
+public class AverageDurationAnalysisTest {
 
   private final AverageDurationAnalysis analysis = new AverageDurationAnalysis();
 
   @Test
-  void empty_returnsZero() {
+  public void empty_returnsZero() {
     assertEquals(0L, (long) (Long) analysis.apply(List.of()).getValue());
   }
 
   @Test
-  void sixtyAndOneTwenty_returnsNinetyRounded() {
+  public void sixtyAndOneTwenty_returnsNinetyRounded() {
     LocalDateTime t = LocalDateTime.of(2025, 10, 1, 22, 0);
     List<SleepingSession> sessions =
         List.of(

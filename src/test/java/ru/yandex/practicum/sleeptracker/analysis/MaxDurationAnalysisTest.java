@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.sleeptracker.model.SleepQuality;
 import ru.yandex.practicum.sleeptracker.model.SleepingSession;
 
-class MaxDurationAnalysisTest {
+public class MaxDurationAnalysisTest {
 
   private final MaxDurationAnalysis analysis = new MaxDurationAnalysis();
 
   @Test
-  void empty_returnsZero() {
+  public void empty_returnsZero() {
     assertEquals(0L, (long) (Long) analysis.apply(List.of()).getValue());
   }
 
   @Test
-  void twoSessions_returnsLonger() {
+  public void twoSessions_returnsLonger() {
     LocalDateTime t = LocalDateTime.of(2025, 10, 1, 22, 0);
     List<SleepingSession> sessions =
         List.of(

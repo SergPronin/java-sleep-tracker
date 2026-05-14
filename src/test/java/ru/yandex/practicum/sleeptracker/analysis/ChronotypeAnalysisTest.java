@@ -9,17 +9,17 @@ import ru.yandex.practicum.sleeptracker.model.Chronotype;
 import ru.yandex.practicum.sleeptracker.model.SleepQuality;
 import ru.yandex.practicum.sleeptracker.model.SleepingSession;
 
-class ChronotypeAnalysisTest {
+public class ChronotypeAnalysisTest {
 
   private final ChronotypeAnalysis analysis = new ChronotypeAnalysis();
 
   @Test
-  void empty_defaultsToPigeon() {
+  public void empty_defaultsToPigeon() {
     assertEquals(Chronotype.PIGEON, analysis.apply(List.of()).getValue());
   }
 
   @Test
-  void tie_betweenOwlAndLark_returnsPigeon() {
+  public void tie_betweenOwlAndLark_returnsPigeon() {
     List<SleepingSession> sessions =
         List.of(
             new SleepingSession(
@@ -42,7 +42,7 @@ class ChronotypeAnalysisTest {
   }
 
   @Test
-  void majorityOwl_returnsOwl() {
+  public void majorityOwl_returnsOwl() {
     List<SleepingSession> sessions =
         List.of(
             new SleepingSession(
@@ -65,7 +65,7 @@ class ChronotypeAnalysisTest {
   }
 
   @Test
-  void onlyDaytimeNap_noClassifiedNights_stillResolves() {
+  public void onlyDaytimeNap_noClassifiedNights_stillResolves() {
     List<SleepingSession> sessions =
         List.of(
             new SleepingSession(

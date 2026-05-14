@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.sleeptracker.model.SleepQuality;
 import ru.yandex.practicum.sleeptracker.model.SleepingSession;
 
-class MinDurationAnalysisTest {
+public class MinDurationAnalysisTest {
 
   private final MinDurationAnalysis analysis = new MinDurationAnalysis();
 
   @Test
-  void empty_returnsZero() {
+  public void empty_returnsZero() {
     assertEquals(0L, (long) (Long) analysis.apply(List.of()).getValue());
   }
 
   @Test
-  void twoSessions_returnsShorter() {
+  public void twoSessions_returnsShorter() {
     LocalDateTime t = LocalDateTime.of(2025, 10, 1, 22, 0);
     List<SleepingSession> sessions =
         List.of(

@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.sleeptracker.model.SleepQuality;
 import ru.yandex.practicum.sleeptracker.model.SleepingSession;
 
-class CountSessionsAnalysisTest {
+public class CountSessionsAnalysisTest {
 
   private final CountSessionsAnalysis analysis = new CountSessionsAnalysis();
 
   @Test
-  void emptyList_returnsZero() {
+  public void emptyList_returnsZero() {
     assertEquals(0L, (long) (Long) analysis.apply(List.of()).getValue());
   }
 
   @Test
-  void threeSessions_returnsThree() {
+  public void threeSessions_returnsThree() {
     LocalDateTime t = LocalDateTime.of(2025, 10, 1, 22, 0);
     List<SleepingSession> sessions =
         List.of(

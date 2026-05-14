@@ -1,11 +1,9 @@
 package ru.yandex.practicum.sleeptracker.parser;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Stream;
 import ru.yandex.practicum.sleeptracker.model.SleepQuality;
 import ru.yandex.practicum.sleeptracker.model.SleepingSession;
 
@@ -14,8 +12,8 @@ public class SleepLogParser {
     private static final DateTimeFormatter FORMATTER =
         DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
-    public List<SleepingSession> parse(String path) throws IOException {
-        return Files.lines(Path.of(path))
+    public List<SleepingSession> parse(Stream<String> lines) {
+        return lines
             .filter(line -> !line.isBlank())
             .map(this::parseLine)
             .toList();
